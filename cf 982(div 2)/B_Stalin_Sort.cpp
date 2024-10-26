@@ -45,16 +45,27 @@ int32_t main() {
         }
         //!for default sorted descending
 
-        vector<int> main;
-        for (int i = 0; i < n - 1; i++) {  // Loop until n-1 to prevent out-of-bounds
-            if (a[i + 1] <= a[i])
-                main.push_back(a[i]);
-        }
-        if (main.empty() || main.back() != a[n - 1]) {
-            main.push_back(a[n - 1]);
-        }
+        // vector<int> main;
+        // for (int i = 0; i < n - 1; i++) {  // Loop until n-1 to prevent out-of-bounds
+        //     if (a[i + 1] <= a[i])
+        //         main.push_back(a[i]);
+        // }
+        // if (main.empty() || main.back() != a[n - 1]) {
+        //     main.push_back(a[n - 1]);
+        // }
 
-        cout << a.size() - main.size() << endl;
+        // cout << a.size() - main.size() << endl;
+        int rem=0;
+        vector<int> modified = a;
+        for (int i = 1; i < n; i++){
+            if(modified[i] > modified[i-1]){
+                modified.erase(modified.begin() + i);
+                if(isDescending(stalinsort(modified))){
+                    cout<<++rem<<endl;
+                    continue;
+                }
+            }
+        }
     }
     return 0;
 }
