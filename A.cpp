@@ -12,7 +12,7 @@ void solve() {
             v++;
         }else if(i!=n-1 && s[i]=='N' && s[i+1]=='G'){
             c++;
-            i++;00
+            i++;
         }else if(s[i]=='Y'){
             alt++;  
         }else{
