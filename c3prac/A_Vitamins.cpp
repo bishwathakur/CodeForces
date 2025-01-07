@@ -23,7 +23,6 @@ const int INF = 1000000007;
 
 void getC(string a, string b)
 {
-    
 }
 void solve()
 {
@@ -79,8 +78,5 @@ int32_t main()
                 AC=A|C=101(5)⁡
 
                 ABC=A|B|C=AB|C
-
-
-
 
 */
