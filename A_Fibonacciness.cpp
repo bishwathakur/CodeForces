@@ -5,9 +5,9 @@ using namespace std;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
-#define eb emplace_back
 #define pii pair<int, int>
 #define f(i, n) for (int i = 0; i < n; i++)
+#define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
     int a[n];    \
     f(i, n) cin >> a[i]
@@ -25,38 +25,36 @@ int M = 1000000007;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    iv(a, n);
-    iv(b, n);
-    vector<pii> v;
+    int a, b, d, e;
+    cin >> a >> b >> d >> e;
+    int ans1 = 1, ans2 = 1, ans3 = 1;
 
-    for (int i = 0; i < n; i++)
-    {
-        int sum = 0;
-        sum = a[i] + b[i];
-        v.eb(sum, i);
-    }
-    auto it = *max_element(v.begin(), v.end());
-    // cout << it.first << " " << it.second << endl;
-    int ans = it.first;
-    int e = it.second;
-    int i = 0;
-    f(i, n)
-    {
-        if (i == e)
-        {
-            continue;
-        }
-        ans += max(a[i], b[i]);
-    }
-    cout << ans;
+    int c1 = a + b;
+    if (b + c1 == d)
+        ans1++;
+    if (c1 + d == e)
+        ans1++;
+
+    int c2 = d - b;
+    if (a + b == c2)
+        ans2++;
+    if (c2 + d == e)
+        ans2++;
+
+    int c3 = e - d;
+    if (a + b == c3)
+        ans3++;
+    if (b + c3 == d)
+        ans3++;
+
+    cout << max({ans1, ans2, ans3});
     newline;
 }
 
 int32_t main()
 {
-    fastIO;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)

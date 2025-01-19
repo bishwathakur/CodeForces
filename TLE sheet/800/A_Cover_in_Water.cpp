@@ -5,9 +5,9 @@ using namespace std;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
-#define eb emplace_back
 #define pii pair<int, int>
 #define f(i, n) for (int i = 0; i < n; i++)
+#define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
     int a[n];    \
     f(i, n) cin >> a[i]
@@ -27,36 +27,37 @@ void solve()
 {
     int n;
     cin >> n;
-    iv(a, n);
-    iv(b, n);
-    vector<pii> v;
+    string a;
+    cin >> a;
+    int ans = 0;
+    bool find = (a.find("...") != string::npos);
 
-    for (int i = 0; i < n; i++)
+    // cout << "a:" << a << endl;
+    // cout << "find: " << find << endl;
+    if (find)
     {
-        int sum = 0;
-        sum = a[i] + b[i];
-        v.eb(sum, i);
+        ans = 2;
     }
-    auto it = *max_element(v.begin(), v.end());
-    // cout << it.first << " " << it.second << endl;
-    int ans = it.first;
-    int e = it.second;
-    int i = 0;
-    f(i, n)
+    else
     {
-        if (i == e)
+        f(i, n)
         {
-            continue;
+            if (a[i] == '.')
+            {
+                ans++;
+            }
         }
-        ans += max(a[i], b[i]);
     }
     cout << ans;
     newline;
+
+    // code here
 }
 
 int32_t main()
 {
-    fastIO;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)

@@ -5,7 +5,6 @@ using namespace std;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
-#define eb emplace_back
 #define pii pair<int, int>
 #define f(i, n) for (int i = 0; i < n; i++)
 #define ia(a, n) \
@@ -25,30 +24,16 @@ int M = 1000000007;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    iv(a, n);
-    iv(b, n);
-    vector<pii> v;
-
-    for (int i = 0; i < n; i++)
+    int n, m, q;
+    cin >> n >> m >> q;
+    iv(b, m);
+    int a;
+    cin >> a;
+    int ans = INT_MAX;
+    f(i, m)
     {
-        int sum = 0;
-        sum = a[i] + b[i];
-        v.eb(sum, i);
-    }
-    auto it = *max_element(v.begin(), v.end());
-    // cout << it.first << " " << it.second << endl;
-    int ans = it.first;
-    int e = it.second;
-    int i = 0;
-    f(i, n)
-    {
-        if (i == e)
-        {
-            continue;
-        }
-        ans += max(a[i], b[i]);
+        int diff = abs(b[i] - a);
+        ans = min(ans, diff);
     }
     cout << ans;
     newline;
@@ -56,7 +41,8 @@ void solve()
 
 int32_t main()
 {
-    fastIO;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)

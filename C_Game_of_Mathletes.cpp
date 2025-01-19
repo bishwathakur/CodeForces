@@ -5,9 +5,9 @@ using namespace std;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
-#define eb emplace_back
 #define pii pair<int, int>
 #define f(i, n) for (int i = 0; i < n; i++)
+#define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
     int a[n];    \
     f(i, n) cin >> a[i]
@@ -25,38 +25,46 @@ int M = 1000000007;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    iv(a, n);
-    iv(b, n);
-    vector<pii> v;
+    int n, k;
+    cin >> n >> k;
+    vector<int> v(n);
+    map<int, int> freq;
 
-    for (int i = 0; i < n; i++)
-    {
-        int sum = 0;
-        sum = a[i] + b[i];
-        v.eb(sum, i);
-    }
-    auto it = *max_element(v.begin(), v.end());
-    // cout << it.first << " " << it.second << endl;
-    int ans = it.first;
-    int e = it.second;
-    int i = 0;
     f(i, n)
     {
-        if (i == e)
-        {
-            continue;
-        }
-        ans += max(a[i], b[i]);
+        cin >> v[i];
+        freq[v[i]]++;
     }
-    cout << ans;
+
+    int score = 0;
+
+    for (auto &pair : freq)
+    {
+        int a = pair.first;
+        int b = k - a;
+
+        if (a == b)
+        {
+            score += freq[a] / 2;
+            freq[a] = 0;
+        }
+        else if (freq[b] > 0)
+        {
+            int pairs = min(freq[a], freq[b]);
+            score += pairs;
+            freq[a] -= pairs;
+            freq[b] -= pairs;
+        }
+    }
+
+    cout << score;
     newline;
 }
 
 int32_t main()
 {
-    fastIO;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)

@@ -29,34 +29,44 @@ void solve()
     cin >> n;
     iv(a, n);
     iv(b, n);
-    vector<pii> v;
-
-    for (int i = 0; i < n; i++)
-    {
-        int sum = 0;
-        sum = a[i] + b[i];
-        v.eb(sum, i);
-    }
-    auto it = *max_element(v.begin(), v.end());
-    // cout << it.first << " " << it.second << endl;
-    int ans = it.first;
-    int e = it.second;
-    int i = 0;
+    // code here
+    int sumA = 0, sumB = 0;
     f(i, n)
     {
-        if (i == e)
-        {
-            continue;
-        }
-        ans += max(a[i], b[i]);
+        sumA += a[i];
+        sumB += b[i];
     }
-    cout << ans;
-    newline;
+
+    vector<pii> ans;
+    int maxi = INT_MIN, ind = -1;
+
+    f(i, n)
+    {
+        int diff = b[i] - a[i];
+        if (diff >= 0)
+        {
+            maxi = max(maxi, diff);
+            ind = i;
+        }
+    }
+    sort(ans.rbegin(), ans.rend());
+
+    f(i, n)
+    {
+        if (a[i] - b[i] < maxi && i != ind)
+        {
+            no;
+            return;
+        }
+    }
+    yes;
+    return;
 }
 
 int32_t main()
 {
-    fastIO;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)
