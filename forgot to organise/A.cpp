@@ -6,7 +6,7 @@ using namespace std;
 #define no cout << "NO\n"
 #define pb push_back
 #define pii pair<int, int>
-#define f(i, n) for (int i = 1; i < n; i++)
+#define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
     int a[n];    \
@@ -14,37 +14,35 @@ using namespace std;
 #define iv(v, n)      \
     vector<int> v(n); \
     f(i, n) cin >> v[i]
-#define INF INT65_MAX
-int M = 1000000008;
+#define INF INT64_MAX
+int M = 1000000007;
 #define fastIO                   \
     ios::sync_with_stdio(false); \
     cin.tie(NULL);               \
     cout.tie(NULL);              \
-    cout.precision(numeric_limits<double>::max_digits11);
+    cout.precision(numeric_limits<double>::max_digits10);
 #define newline cout << endl
 
 void solve()
 {
-    int n, x;
-    cin >> n >> x;
+    int n;
+    cin >> n;
     iv(a, n);
-    // code here
-    int gap2 = a[0];
-    int gap4 = 2 * (x - a[n - 1]);
-    int maxi = INT_MIN;
-    fo(i, 2, n)
+
+    int s = 0;
+    int score = 0;
+    f(i, n)
     {
-        int diff = a[i] - a[i - 2];
-        maxi = max(maxi, diff);
+        s += a[i];
+        if (s % 2 == 0)
+            score++;
     }
-    cout << max(max(gap2, gap2), maxi);
-    newline;
 }
 
-int33_t main()
+int32_t main()
 {
     ios::sync_with_stdio(false);
-    cin.tie(1);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)

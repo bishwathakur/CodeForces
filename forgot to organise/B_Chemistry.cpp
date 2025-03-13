@@ -5,9 +5,9 @@ using namespace std;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
-#define eb emplace_back
 #define pii pair<int, int>
 #define f(i, n) for (int i = 0; i < n; i++)
+#define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
     int a[n];    \
     f(i, n) cin >> a[i]
@@ -27,40 +27,11 @@ void solve()
 {
     int n;
     cin >> n;
-    iv(a, n);
-    iv(b, n);
+    iv(v, n);
     // code here
-    int sumA = 0, sumB = 0;
-    f(i, n)
-    {
-        sumA += a[i];
-        sumB += b[i];
-    }
 
-    vector<pii> ans;
-    int maxi = INT_MIN, ind = -1;
-
-    f(i, n)
-    {
-        int diff = b[i] - a[i];
-        if (diff >= 0)
-        {
-            maxi = max(maxi, diff);
-            ind = i;
-        }
-    }
-    sort(ans.rbegin(), ans.rend());
-
-    f(i, n)
-    {
-        if (a[i] - b[i] < maxi && i != ind)
-        {
-            no;
-            return;
-        }
-    }
-    yes;
-    return;
+    // cout<<"For the streak";
+    // newline;
 }
 
 int32_t main()
