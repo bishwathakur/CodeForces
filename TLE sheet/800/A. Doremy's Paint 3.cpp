@@ -1,7 +1,12 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
-#define int long long int
+#define int long long
+
+const int INF = 2e18;
+const int M = 1000000007;
+
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 #define pb push_back
@@ -9,6 +14,9 @@ using namespace std;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vii vector<pair<int, int>>
+#define ff first
+#define ss second
+#define setbits(n) __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -23,7 +31,6 @@ using namespace std;
         std::cout << i << " "; \
     }
 #define INF INT64_MAX
-int M = 1000000007;
 #define fastIO                   \
     ios::sync_with_stdio(false); \
     cin.tie(NULL);               \
@@ -63,51 +70,31 @@ int nCr(int n, int r)
 // Main
 void solve()
 {
-    int l, r, d, u;
-    cin >> l >> r >> d >> u;
-
-    // if ((l + r) != (d + u))
-    // {
-    //     no;
-    //     return;
-    // }
-    // // Code here
-    // pii L = {-l, 0};
-    // pii R = {r, 0};
-    // pii U = {0, u};
-    // pii D = {0, -d};
-
-    // int s1 = (L.first - D.first) * (L.first - D.first) + (L.second - D.second) * (L.second - D.second);
-    // int s2 = (D.first - R.first) * (D.first - R.first) + (D.second - R.second) * (D.second - R.second);
-    // int s3 = (R.first - U.first) * (R.first - U.first) + (R.second - U.second) * (R.second - U.second);
-    // int s4 = (U.first - L.first) * (U.first - L.first) + (U.second - L.second) * (U.second - L.second);
-
-    // if (s1 != s2 || s3 != s4 || s2 != s3)
-    // {
-    //     no;
-    //     return;
-    // }
-
-    // int dot1 = (L.first - D.first) * (D.first - R.first) + (L.second - D.second) * (D.second - R.second);
-    // int dot2 = (D.first - R.first) * (R.first - U.first) + (D.second - R.second) * (R.second - U.second);
-    // int dot3 = (R.first - U.first) * (U.first - L.first) + (R.second - U.second) * (U.second - L.second);
-    // int dot4 = (U.first - L.first) * (L.first - D.first) + (U.second - L.second) * (L.second - D.second);
-
-    // if (dot1 != 0 || dot2 != 0 || dot3 != 0 || dot4 != 0)
-    // {
-    //     no;
-    //     return;
-    // }
-    //! NO FKIN NEED FOR ALL OF THESE CHECKS JUST DO GEOMETRY FIRST, CHECK SQUARES SIDE LENGTH
-    //& l^2 + r^2 = d^2 + u^2 = r^2 + d^2 = l^2 + u^2
-    //& So => l = r = d = u(l=r,u=d,l=u,r=d)
-    if (l != r || d != u || l != u || r != d)
-    {
-        no;
-        return;
+    int n;
+    cin >> n;
+    iv(v, n);
+    // Code here
+    map<int, int> mp;
+    for(int i=0;i<n;i++){
+        mp[v[i]]++;
     }
-    yes;
-    return;
+
+    if(mp.size()>=3){
+      no;
+      return;
+    }
+    int div1 = mp.begin()->second;
+    int div2 = mp.rbegin()->second;
+    if(div1==div2){
+      yes;
+      return;
+    }else if (n%2==1 && abs(div1-div2)==1){
+      yes;
+      return;
+    }else{
+      no;
+      return;
+    }
 }
 
 int32_t main()

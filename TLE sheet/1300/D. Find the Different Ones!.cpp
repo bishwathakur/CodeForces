@@ -57,36 +57,51 @@ int fact(int n) {
 int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 
 // Main
+// Function to solve a single test case
 void solve() {
-  int n;
-  cin >> n;
-  // Code here
+    int n; // n is long long due to #define
+    cin >> n;
+    iv(a, n);
 
-  if (n == 1) {
-    cout << "1";
+    vi next_diff(n); 
+    if (n > 0) {   
+        next_diff[n - 1] = n; 
+    }
+
+    // Iterate from the second-to-last element down to the first element
+    for (int i = n - 2; i >= 0; --i) {
+        if (a[i + 1] != a[i]) {
+            // If the next element is different, its index is the answer for i
+            next_diff[i] = i + 1; // Store the 0-based index
+        } else {
+            // If the next element is the same, propagate the result from the right
+            next_diff[i] = next_diff[i + 1];
+        }
+    }
+
+    int q; 
+    cin >> q;
+    f(k, q) {               
+        int l, r;           
+        cin >> l >> r;
+        int start_idx = l - 1;
+
+        // Get the precomputed 0-based index of the first element different from a[start_idx]
+        int diff_idx = next_diff[start_idx]; // diff_idx is long long
+
+        // Check if this different element's index falls within the 1-based range [l, r].
+        // In 0-based terms, this means diff_idx should be <= r-1.
+        // Equivalently, check if diff_idx < r.
+        if (diff_idx < r) {
+            // A differing element is found within the range.
+            // Output the 1-based indices: l (for start_idx) and diff_idx + 1.
+            cout << l << " " << diff_idx + 1 << endl; // Use endl macro for newline
+        } else {
+            // No differing element found up to index r-1. All elements a[l...r] are the same.
+            cout << -1 << " " << -1 << endl; // Output -1 -1
+        }
+    }
     newline;
-    return;
-  }
-
-  if (n % 2 == 0) {
-    cout << -1;
-    newline;
-    return;
-  }
-  vi perm(n);
-  // fo(i, 1, n+1) {
-  //   perm[i - 1] = ((2 * (i - 1)) % n) + 1; 
-  // }
-  f(i,n){
-    perm[i]=((((2*i)+1)%n)==0)?n:(((2*i)+1)%n);
-  }
-
-  for (auto x : perm) {
-    cout << x << " ";
-  }
-
-  newline;
-  return;
 }
 
 int32_t main() {

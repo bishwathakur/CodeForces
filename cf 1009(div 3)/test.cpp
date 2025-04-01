@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 #define endl "\n"
 #define int long long
-
 const int INF = 2e18;
 const int M = 1000000007;
-
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
@@ -19,21 +18,39 @@ const int M = 1000000007;
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n)                                                               \
-  int a[n];                                                                    \
-  f(i, n) cin >> a[i]
+  \ 
+    int a[n];                                                                  \
+  \ 
+        f(i, n) cin >>                                                         \
+      a[i]
 #define iv(v, n)                                                               \
-  vector<int> v(n);                                                            \
-  f(i, n) cin >> v[i]
+  \ 
+            vector<int>                                                        \
+      v(n);                                                                    \
+  \ 
+                f(i, n) cin >>                                                 \
+      v[i]
 #define vout(v)                                                                \
-  for (auto i : v) {                                                           \
-    std::cout << i << " ";                                                     \
+  \ 
+                    for (auto i : v)           \ 
+                        {                                                      \
+    \ 
+                                  std::cout                                    \
+        << i << " ";                                                           \
+    \ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \
   }
 #define INF INT64_MAX
+int M = 1000000007;
 #define fastIO                                                                 \
-  ios::sync_with_stdio(false);                                                 \
-  cin.tie(NULL);                                                               \
-  cout.tie(NULL);                                                              \
-  cout.precision(numeric_limits<double>::max_digits10);
+  \ 
+    ios::sync_with_stdio(false);                                               \
+  \ 
+        cin.tie(NULL);                                                         \
+  \ 
+            cout.tie(NULL);                                                    \
+  \ 
+                cout.precision(numeric_limits<double>::max_digits10);
 #define srt(v) sort(v.begin(), v.end())
 #define rsrt(v) sort(v.rbegin(), v.rend())
 #define newline cout << endl
@@ -60,33 +77,8 @@ int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 void solve() {
   int n;
   cin >> n;
+  iv(v, n);
   // Code here
-
-  if (n == 1) {
-    cout << "1";
-    newline;
-    return;
-  }
-
-  if (n % 2 == 0) {
-    cout << -1;
-    newline;
-    return;
-  }
-  vi perm(n);
-  // fo(i, 1, n+1) {
-  //   perm[i - 1] = ((2 * (i - 1)) % n) + 1; 
-  // }
-  f(i,n){
-    perm[i]=((((2*i)+1)%n)==0)?n:(((2*i)+1)%n);
-  }
-
-  for (auto x : perm) {
-    cout << x << " ";
-  }
-
-  newline;
-  return;
 }
 
 int32_t main() {
@@ -97,16 +89,18 @@ int32_t main() {
 
   int t;
   cin >> t;
-  // t = 1;
+  t = 1;
   while (t--) {
     solve();
   }
 #ifdef ONLINE_JUDGE
   auto end = chrono::high_resolution_clock::now();
   cerr << fixed << setprecision(4);
-  cerr << "Execution time: "
+  cerr << "Execution
+      time : "
        << chrono::duration_cast<chrono::duration<double>>(end - begin).count()
-       << " seconds" << endl;
+       << " seconds"
+       << endl;
 #endif
 
   return 0;

@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
@@ -60,32 +61,14 @@ int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 void solve() {
   int n;
   cin >> n;
-  // Code here
-
-  if (n == 1) {
-    cout << "1";
-    newline;
-    return;
+  int ans = 3*(n/15);
+  n%=15;
+  f(i,n+1){
+    if(i%3==i%5){
+      ans++;
+    }
   }
-
-  if (n % 2 == 0) {
-    cout << -1;
-    newline;
-    return;
-  }
-  vi perm(n);
-  // fo(i, 1, n+1) {
-  //   perm[i - 1] = ((2 * (i - 1)) % n) + 1; 
-  // }
-  f(i,n){
-    perm[i]=((((2*i)+1)%n)==0)?n:(((2*i)+1)%n);
-  }
-
-  for (auto x : perm) {
-    cout << x << " ";
-  }
-
-  newline;
+  cout << ans << endl;
   return;
 }
 

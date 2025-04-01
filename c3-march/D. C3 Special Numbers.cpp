@@ -1,7 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
-#define int long long int
+#define int long long
+
+const int INF = 2e18;
+const int M = 1000000007;
+
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
@@ -9,6 +13,9 @@ using namespace std;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vii vector<pair<int, int>>
+#define ff first
+#define ss second
+#define setbits(n) __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -23,7 +30,6 @@ using namespace std;
         std::cout << i << " "; \
     }
 #define INF INT64_MAX
-int M = 1000000007;
 #define fastIO                   \
     ios::sync_with_stdio(false); \
     cin.tie(NULL);               \
@@ -65,8 +71,33 @@ void solve()
 {
     int n;
     cin >> n;
-    iv(v, n);
     // Code here
+
+    // If n is less than the smallest sum of two stellar numbers (1+1)
+    if (n < 2) {
+        cout << "NO";
+        return;
+    }
+    
+    vector<int> stellar;
+    // Generate stellar numbers T(k) = k*(k+1)/2 until T(k) > n
+    for (int k = 1; ; k++) {
+        int t = k * (k + 1) / 2;
+        if (t > n) break;
+        stellar.push_back(t);
+    }
+    
+    // Check for each stellar number if the complement exists
+    for (int t : stellar) {
+        int complement = n - t;
+        // Binary search in the stellar vector
+        if (binary_search(stellar.begin(), stellar.end(), complement)) {
+            cout << "YES";
+            return;
+        }
+    }
+    cout << "NO";
+     
 }
 
 int32_t main()
@@ -75,14 +106,7 @@ int32_t main()
     auto begin = chrono::high_resolution_clock::now();
     fastIO;
 #endif
-
-    int t;
-    cin >> t;
-    t = 1;
-    while (t--)
-    {
-        solve();
-    }
+    solve();
 #ifdef ONLINE_JUDGE
     auto end = chrono::high_resolution_clock::now();
     cerr << fixed << setprecision(4);

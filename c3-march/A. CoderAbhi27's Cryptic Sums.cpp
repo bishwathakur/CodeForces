@@ -4,8 +4,7 @@ using namespace std;
 #define int long long
 
 const int INF = 2e18;
-const int M = 1000000007;
-
+const int MOD = 1000000007;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
@@ -58,34 +57,23 @@ int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 
 // Main
 void solve() {
-  int n;
-  cin >> n;
+  int a, b;
+  cin >> a >> b;
   // Code here
-
-  if (n == 1) {
-    cout << "1";
-    newline;
+  if (b == 1) {
+    cout << 0;
     return;
   }
+  int max_r = min(b - 1, a);
+  int ans = 0;
 
-  if (n % 2 == 0) {
-    cout << -1;
-    newline;
-    return;
+  for (int r = 1; r <= max_r; r++) {
+    int q = a / r;
+    int sum_q = ((int)q * (q + 1) / 2) % MOD;
+    int add = (((int)b * sum_q) % MOD + ((int)r * q) % MOD) % MOD;
+    ans = (ans + add) % MOD;
   }
-  vi perm(n);
-  // fo(i, 1, n+1) {
-  //   perm[i - 1] = ((2 * (i - 1)) % n) + 1; 
-  // }
-  f(i,n){
-    perm[i]=((((2*i)+1)%n)==0)?n:(((2*i)+1)%n);
-  }
-
-  for (auto x : perm) {
-    cout << x << " ";
-  }
-
-  newline;
+  cout<<ans;
   return;
 }
 
@@ -95,12 +83,7 @@ int32_t main() {
   fastIO;
 #endif
 
-  int t;
-  cin >> t;
-  // t = 1;
-  while (t--) {
-    solve();
-  }
+ solve();
 #ifdef ONLINE_JUDGE
   auto end = chrono::high_resolution_clock::now();
   cerr << fixed << setprecision(4);

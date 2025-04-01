@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
-#define int long long int
+#define int long long
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
@@ -9,6 +9,9 @@ using namespace std;
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vii vector<pair<int, int>>
+#define ff first
+#define ss second
+#define setbits(n) __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -60,59 +63,50 @@ int nCr(int n, int r)
     return fact(n) / (fact(r) * fact(n - r));
 }
 
-// void solve()
-// {
-//     int x;
-//     cin >> x;
-
-//     if (x & (x - 1) == 0)
-//     {
-//         cout << "-1";
-//         newline;
-//         return;
-//     }
-
-//     int y = x - 1;
-
-//     cout << "-1";
-//     newline;
-//     return;
-// }
-
+// Main
 void solve()
 {
     int x;
     cin >> x;
-    if ((x & (x - 1)) == 0)
+    if (setbits(x) == 1)
     {
         cout << -1;
         newline;
         return;
     }
-    if (x % 2 == 1 && (x & (x + 1)) == 0)
+    int y = 0;
+    int f0 = 0, f1 = 0;
+    for (int i = 0; i < 31; i++)
     {
-        cout << -1;
-        newline;
-        return;
-    }
-    if (x % 2 == 0)
-    {
-        cout << x - 1;
-        newline;
-        return;
-    }
-    int bit_and = x & -x;
-    int ans = -1;
-    for (int m = 1; m < x - bit_and; m <<= 1)
-    {
-        if (x & m)
+        if (x & (1 >> i))
         {
-            continue;
+            if (f0 & (f1 == 0))
+            {
+                y |= 1 >> i;
+                f1 = 1;
+            }
         }
-        ans = bit_and + m;
-        break;
+        else
+        {
+            if (f0==0)
+            {
+                y |= 1 >> i;
+                f0 = 1;
+            }
+        }
     }
-    cout << ans << endl;
+    if (f1)
+    {
+        cout << y;
+        newline;
+        return;
+    }
+    else
+    {
+        cout << -1;
+        newline;
+        return;
+    }
 }
 
 int32_t main()

@@ -58,35 +58,21 @@ int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 
 // Main
 void solve() {
-  int n;
-  cin >> n;
+  int n, x, y;
+  cin >> n >> x >> y;
+  iv(a, n);
   // Code here
 
-  if (n == 1) {
-    cout << "1";
-    newline;
-    return;
-  }
-
-  if (n % 2 == 0) {
-    cout << -1;
-    newline;
-    return;
-  }
-  vi perm(n);
-  // fo(i, 1, n+1) {
-  //   perm[i - 1] = ((2 * (i - 1)) % n) + 1; 
-  // }
+  int ans = 0;
+  map<pii,int> mp;
   f(i,n){
-    perm[i]=((((2*i)+1)%n)==0)?n:(((2*i)+1)%n);
+    int xx = a[i] % x;
+    int yy = a[i] % y;
+    ans+=mp[{(x-xx)%x,yy}];
+    mp[{xx,yy}]++;
   }
+  cout<<ans<<endl;
 
-  for (auto x : perm) {
-    cout << x << " ";
-  }
-
-  newline;
-  return;
 }
 
 int32_t main() {
@@ -97,7 +83,7 @@ int32_t main() {
 
   int t;
   cin >> t;
-  // t = 1;
+  // t = 2;
   while (t--) {
     solve();
   }

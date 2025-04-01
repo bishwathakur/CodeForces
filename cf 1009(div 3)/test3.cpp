@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+##include<bits / stdc++.h> using namespace std;
 #define endl "\n"
 #define int long long
 
@@ -29,6 +28,7 @@ const int M = 1000000007;
     std::cout << i << " ";                                                     \
   }
 #define INF INT64_MAX
+int M = 1000000007;
 #define fastIO                                                                 \
   ios::sync_with_stdio(false);                                                 \
   cin.tie(NULL);                                                               \
@@ -56,37 +56,10 @@ int fact(int n) {
 }
 int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 
-// Main
 void solve() {
   int n;
   cin >> n;
-  // Code here
-
-  if (n == 1) {
-    cout << "1";
-    newline;
-    return;
-  }
-
-  if (n % 2 == 0) {
-    cout << -1;
-    newline;
-    return;
-  }
-  vi perm(n);
-  // fo(i, 1, n+1) {
-  //   perm[i - 1] = ((2 * (i - 1)) % n) + 1; 
-  // }
-  f(i,n){
-    perm[i]=((((2*i)+1)%n)==0)?n:(((2*i)+1)%n);
-  }
-
-  for (auto x : perm) {
-    cout << x << " ";
-  }
-
-  newline;
-  return;
+  iv(v, n);
 }
 
 int32_t main() {
@@ -97,7 +70,7 @@ int32_t main() {
 
   int t;
   cin >> t;
-  // t = 1;
+  t = 1;
   while (t--) {
     solve();
   }
@@ -110,4 +83,5 @@ int32_t main() {
 #endif
 
   return 0;
+}
 }

@@ -74,16 +74,24 @@ void solve()
         return;
     }
 
-    srt(v);
+    // srt(v);
 
-    int result = v[n - 1];
+    // int result = v[n - 1];
 
-    for (int i = n - 2; i >= 0; i--)
-    {
-        result = result + v[i] - 1;
+    // for (int i = n - 2; i >= 0; i--)
+    // {
+    //     result = result + v[i] - 1;
+    // }
+
+    // cout << result;
+
+    //! SIMPLIFIED CODE
+    int res = 0;
+    f(i,n){
+        res+=v[i];
     }
-
-    cout << result;
+    res-=(n-1);//* -1 for each index (since one less than the sum of two needed)
+    cout<<res;
     newline;
     return;
 }
