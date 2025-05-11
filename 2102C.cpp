@@ -50,10 +50,7 @@ int gcd(int a, int b)
     }
     return gcd(b, a % b);
 }
-int lcm(int a, int b)
-{
-    return a * b / gcd(a, b);
-}
+int lcm(int a, int b) { return a * b / gcd(a, b); }
 int fact(int n)
 {
     if (n == 0)
@@ -63,10 +60,7 @@ int fact(int n)
         res = res * i;
     return res;
 }
-int nCr(int n, int r)
-{
-    return fact(n) / (fact(r) * fact(n - r));
-}
+int nCr(int n, int r) { return fact(n) / (fact(r) * fact(n - r)); }
 
 vb sieve(int limit)
 {
@@ -89,9 +83,32 @@ void solve()
 {
     int n;
     cin >> n;
-    iv(v, n);
     // Code here
-     
+    vvi a(n, vector<int>(n));
+    // Place the largest card in (0,0)
+    int maxv = n * n - 1;
+    a[0][0] = maxv;
+
+    // Fill the rest with 0..maxv-1 in row-major order
+    int cur = 0;
+    f(i, n)
+    {
+        f(j, n)
+        {
+            if (i == 0 && j == 0)
+                continue;
+            a[i][j] = cur++;
+        }
+    }
+
+    // Output
+    f(i, n)
+    {
+        f(j, n)
+        {
+            cout << a[i][j] << (j + 1 < n ? ' ' : '\n');
+        }
+    }
 }
 
 int32_t main()

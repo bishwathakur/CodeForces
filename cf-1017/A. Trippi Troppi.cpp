@@ -87,11 +87,10 @@ vb sieve(int limit)
 // Main
 void solve()
 {
-    int n;
-    cin >> n;
-    iv(v, n);
-    // Code here
-     
+    string a,b,c;
+    cin >> a >> b >> c;
+    cout<<a[0]<<b[0]<<c[0];
+    newline;
 }
 
 int32_t main()

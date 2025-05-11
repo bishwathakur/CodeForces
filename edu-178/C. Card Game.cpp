@@ -89,9 +89,48 @@ void solve()
 {
     int n;
     cin >> n;
-    iv(v, n);
-    // Code here
-     
+    string s;
+    cin >> s;
+
+    if(s[0]==s.back()){
+      if(s[0]=='A'){
+        cout << "Alice";
+        newline;
+        return;
+      }
+      else{
+        cout << "Bob";
+        newline;
+        return;
+      }
+    }else if(s[0]=='A' && s.back()=='B' ){
+      if(count(all(s),'B')!=1){
+        cout<<"Bob";
+        newline;
+        return;
+      }else{
+      cout<<"Alice";
+      newline;
+      return;
+      }
+    }else{
+      if(n==2){
+        cout<<"Bob";
+        newline;
+        return;
+      }else{
+        if(s[n-2]=='B'){
+          cout<<"Bob";
+          newline;
+          return;
+        }else{
+          cout<<"Alice";
+          newline;
+          return;
+        }
+      }
+    }
+      
 }
 
 int32_t main()

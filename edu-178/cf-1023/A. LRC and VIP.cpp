@@ -91,7 +91,7 @@ void solve()
     cin >> n;
     iv(v, n);
     // Code here
-     
+      
 }
 
 int32_t main()
@@ -103,7 +103,7 @@ int32_t main()
 
     int t;
     cin >> t;
-    // t = 1;
+    t = 1;
     while (t--)
     {
         solve();
