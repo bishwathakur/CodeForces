@@ -74,14 +74,11 @@ vb sieve(int limit) {
 void solve() {
   int n;
   cin >> n;
-  iv(v, n);
   // Code here
-  vvi a(n, vector<int>(n));
-  // Place the largest card in (0,0)
+  vvi a(n, vi(n));
   int maxv = n * n - 1;
   a[0][0] = maxv;
 
-  // Fill the rest with 0..maxv-1 in row-major order
   int cur = 0;
   f(i,n) {
      f(j,n){

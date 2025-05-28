@@ -15,7 +15,7 @@ const int M = 1000000007;
 #define vii vector<pair<int, int>>
 #define ff first
 #define ss second
-#define setbits(n) __builtin_popcountll(n)
+#define setbits(n)  __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -69,37 +69,21 @@ int nCr(int n, int r)
 // Main
 void solve()
 {
-    int n;
-    cin >> n;
-    vi even, odd;
-    f(i, n)
-    {
-        int x;
-        cin >> x;
-        if ((i & 1) == 0)
-            even.pb(x);
-        else
-            odd.pb(x);
-    }
-    sort(all(even));
-    sort(all(odd));
-
-    vout(even);
-    newline;
-    vout(odd);
-    newline;
-    f(i, n)
-    {
-        if ((i & 1) == 0)
-        {
-            cout << even[i / 2] << " ";
-        }
-        else
-        {
-            cout << odd[i / 2] << " ";
+    string s;
+    cin >> s;
+    int bal = 0;
+    int prev = 0;
+    for(char c:s){
+        bal+= (c == '(' ? 1 : -1);
+        if(bal==0){
+            prev++;
         }
     }
-    newline;
+    if(prev>=2){
+        yes;
+        return;
+    }
+    no;
     return;
 }
 

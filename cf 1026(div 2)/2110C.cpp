@@ -71,33 +71,76 @@ void solve()
 {
     int n;
     cin >> n;
-    vi even, odd;
-    f(i, n)
+    // 1-based arrays
+    vi d(n + 1), ans(n + 1);
+    for (int i = 1; i <= n; i++)
     {
-        int x;
-        cin >> x;
-        if ((i & 1) == 0)
-            even.pb(x);
-        else
-            odd.pb(x);
+        cin >> d[i];
     }
-    sort(all(even));
-    sort(all(odd));
 
-    vout(even);
-    newline;
-    vout(odd);
-    newline;
-    f(i, n)
+    vi L(n + 1), R(n + 1);
+    for (int i = 1; i <= n; i++)
     {
-        if ((i & 1) == 0)
+        cin >> L[i] >> R[i];
+    }
+
+    vi tl(n + 1), th(n + 1);
+    tl[0] = th[0] = 0;
+
+    bool check = true;
+    for (int i = 1; i <= n; i++)
+    {
+        if (d[i] != -1)
         {
-            cout << even[i / 2] << " ";
+            tl[i] = tl[i - 1] + d[i];
+            th[i] = th[i - 1] + d[i];
         }
         else
         {
-            cout << odd[i / 2] << " ";
+            tl[i] = tl[i - 1];
+            th[i] = th[i - 1] + 1;
         }
+        tl[i] = max(tl[i], L[i]);
+        th[i] = min(th[i], R[i]);
+        if (tl[i] > th[i])
+        {
+            check = false;
+            break;
+        }
+    }
+
+    if (!check)
+    {
+        cout << -1;
+        newline;
+        return;
+    }
+
+    int h = tl[n];
+    for (int i = n; i >= 1; i--)
+    {
+        if (d[i] != -1)
+        {
+            ans[i] = d[i];
+            h -= d[i];
+        }
+        else
+        {
+            if (h >= tl[i - 1] && h <= th[i - 1])
+            {
+                ans[i] = 0;
+            }
+            else
+            {
+                ans[i] = 1;
+                h--;
+            }
+        }
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        cout << ans[i] << " ";
     }
     newline;
     return;
@@ -107,9 +150,8 @@ int32_t main()
 {
 #ifdef ONLINE_JUDGE
     auto begin = chrono::high_resolution_clock::now();
-    fastIO;
 #endif
-
+    fastIO;
     int t;
     cin >> t;
     // t = 1;

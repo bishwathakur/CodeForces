@@ -15,7 +15,7 @@ const int M = 1000000007;
 #define vii vector<pair<int, int>>
 #define ff first
 #define ss second
-#define setbits(n) __builtin_popcountll(n)
+#define setbits(n)  __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -66,50 +66,75 @@ int nCr(int n, int r)
     return fact(n) / (fact(r) * fact(n - r));
 }
 
-// Main
+int get(int pos, int len)
+{
+    int steps = 0;
+    while (len > 1)
+    {
+        int x = min(pos,len-pos+1);
+        pos = (x+1)/2;
+        len = pos;
+        steps++;
+    }
+    return steps;
+}
+
 void solve()
 {
-    int n;
-    cin >> n;
-    vi even, odd;
-    f(i, n)
-    {
-        int x;
-        cin >> x;
-        if ((i & 1) == 0)
-            even.pb(x);
-        else
-            odd.pb(x);
-    }
-    sort(all(even));
-    sort(all(odd));
+    int n, m, a, b;
+    cin >> n >> m >> a >> b;
 
-    vout(even);
-    newline;
-    vout(odd);
-    newline;
-    f(i, n)
+    int temp_n = n, temp_m = m;
+    int pos_r = a, pos_c = (m+1)/2;
+    int cnt1 = 0;
+
+    //row 1st
+    while (temp_n > 1)
     {
-        if ((i & 1) == 0)
-        {
-            cout << even[i / 2] << " ";
-        }
-        else
-        {
-            cout << odd[i / 2] << " ";
-        }
+        int x = min(pos_r,temp_n-pos_r+1);
+        pos_r = (x+1)/2;
+        temp_n = x;
+        cnt1++;
     }
-    newline;
-    return;
+    while(temp_m > 1)
+    {
+        int x = min(pos_c,temp_m-pos_c+1);
+        pos_c = (x+1)/2;
+        temp_m = x;
+        cnt1++;
+    }
+
+    temp_n =n, temp_m = m;
+    pos_r = (n+1)/2, pos_c = b;
+    int cnt2 = 0;
+
+    //col 1st
+    while (temp_m > 1)
+    {
+        int x = min(pos_c,temp_m-pos_c+1);
+        pos_c = (x+1)/2;
+        temp_m = x;
+        cnt2++;
+    }
+    while(temp_n > 1)
+    {
+        int x = min(pos_r,temp_n-pos_r+1);
+        pos_r = (x+1)/2;
+        temp_n = x;
+        cnt2++;
+    }
+    cout << min(cnt1, cnt2) << endl;
+    // cout << cnt1 << " " << cnt2 << endl;
+    // cout << min(op1, op2) << endl;
 }
 
 int32_t main()
 {
 #ifdef ONLINE_JUDGE
     auto begin = chrono::high_resolution_clock::now();
-    fastIO;
 #endif
 
+    fastIO;
     int t;
     cin >> t;
     // t = 1;

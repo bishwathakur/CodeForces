@@ -15,7 +15,7 @@ const int M = 1000000007;
 #define vii vector<pair<int, int>>
 #define ff first
 #define ss second
-#define setbits(n) __builtin_popcountll(n)
+#define setbits(n)  __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -71,36 +71,13 @@ void solve()
 {
     int n;
     cin >> n;
-    vi even, odd;
-    f(i, n)
-    {
-        int x;
-        cin >> x;
-        if ((i & 1) == 0)
-            even.pb(x);
-        else
-            odd.pb(x);
+    iv(v, n);
+    // Code here
+    vii inp;
+    f(i,n){
+        cin>>inp[i].first>>inp[i].second;
     }
-    sort(all(even));
-    sort(all(odd));
-
-    vout(even);
-    newline;
-    vout(odd);
-    newline;
-    f(i, n)
-    {
-        if ((i & 1) == 0)
-        {
-            cout << even[i / 2] << " ";
-        }
-        else
-        {
-            cout << odd[i / 2] << " ";
-        }
-    }
-    newline;
-    return;
+    
 }
 
 int32_t main()

@@ -9,13 +9,14 @@ const int M = 1000000007;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 #define pb push_back
+#define eb emplace_back
 #define pii pair<int, int>
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vii vector<pair<int, int>>
 #define ff first
 #define ss second
-#define setbits(n) __builtin_popcountll(n)
+#define setbits(n)  __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -38,7 +39,7 @@ const int M = 1000000007;
 #define srt(v) sort(v.begin(), v.end())
 #define rsrt(v) sort(v.rbegin(), v.rend())
 #define newline cout << endl
-#define all(v) (v).begin(), (v).end()
+#define aint(v) (v).begin(), (v).end()
 
 int gcd(int a, int b)
 {
@@ -67,41 +68,66 @@ int nCr(int n, int r)
 }
 
 // Main
+bool check(int F, int n, vector<vector<pair<int, int>>> adj, vector<int> b)
+{
+    vi mx(n + 1, -1);
+    mx[1] = min(b[1], F);
+    for (int u = 1; u <= n; u++)
+    {
+        if (mx[u] < 0)
+            continue;
+        for (auto &x : adj[u])
+        {
+            int v = x.first;
+            int w = x.second;
+            if (mx[u] >= w)
+            {
+                int temp = min(mx[u] + b[v], F);
+                mx[v] = max(mx[v], temp);
+            }
+        }
+    }
+    return mx[n] >= 0;
+}
 void solve()
 {
-    int n;
-    cin >> n;
-    vi even, odd;
-    f(i, n)
-    {
-        int x;
-        cin >> x;
-        if ((i & 1) == 0)
-            even.pb(x);
-        else
-            odd.pb(x);
+    int n, m;
+    cin >> n >> m;
+    vector<int> b(n + 1);
+    int sum=0;
+    for (int i = 1; i <= n; i++){
+        cin >> b[i];
+        sum+=b[i];
     }
-    sort(all(even));
-    sort(all(odd));
 
-    vout(even);
-    newline;
-    vout(odd);
-    newline;
-    f(i, n)
+    int l = 0, h = sum, ans = -1;
+
+    vector<vector<pair<int, int>>> adj(n + 1);
+    f(i,m)
     {
-        if ((i & 1) == 0)
+        int s, t, w;
+        cin >> s >> t >> w;
+        adj[s].eb(t, w);
+    }
+    while (l <= h)
+    {
+        int mid = l+(h-l)/2;
+        if (check(mid,n,adj,b))
         {
-            cout << even[i / 2] << " ";
+            ans = mid;
+            h = mid - 1;
         }
         else
         {
-            cout << odd[i / 2] << " ";
+            l = mid + 1;
         }
     }
+
+    cout << ans;
     newline;
     return;
 }
+
 
 int32_t main()
 {
@@ -109,7 +135,7 @@ int32_t main()
     auto begin = chrono::high_resolution_clock::now();
     fastIO;
 #endif
-
+    fastIO;
     int t;
     cin >> t;
     // t = 1;

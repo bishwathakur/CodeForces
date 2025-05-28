@@ -15,7 +15,7 @@ const int M = 1000000007;
 #define vii vector<pair<int, int>>
 #define ff first
 #define ss second
-#define setbits(n) __builtin_popcountll(n)
+#define setbits(n)  __builtin_popcountll(n)
 #define f(i, n) for (int i = 0; i < n; i++)
 #define fo(i, a, b) for (int i = a; i < b; i++)
 #define ia(a, n) \
@@ -71,34 +71,47 @@ void solve()
 {
     int n;
     cin >> n;
-    vi even, odd;
-    f(i, n)
-    {
-        int x;
-        cin >> x;
-        if ((i & 1) == 0)
-            even.pb(x);
-        else
-            odd.pb(x);
-    }
-    sort(all(even));
-    sort(all(odd));
-
-    vout(even);
-    newline;
-    vout(odd);
-    newline;
-    f(i, n)
-    {
-        if ((i & 1) == 0)
+    iv(v, n);
+    // Code here
+    sort(all(v));
+    int ans=0;
+    int r = n-1;
+    //check max hta ke
+    int temp1=0;
+    while(r>=0){
+        // cout<<"r 1st: "<<r<<endl;
+        // cout << "sum: " << v[0] + v[r] << endl;
+        if ((v[0] + v[r]) % 2 == 0)
         {
-            cout << even[i / 2] << " ";
+            break;
         }
         else
         {
-            cout << odd[i / 2] << " ";
+            // cout<<"temp1 increased from: "<<temp1<<endl;
+            temp1++;
+            r--;
+        }
+        // cout<<"temp1 increased to: "<<temp1<<endl;
+        // cout<<"r: "<<r<<endl;
+    }
+    // cout<<"temp1: "<<temp1<<endl;
+    //check min hta ke
+    int temp2=0;
+    int l=0;
+    while(l<n){
+        if ((v[l] + v[n - 1]) % 2 == 0)
+        {
+            break;
+        }
+        else
+        {
+            temp2++;
+            l++;
         }
     }
+    // cout<<"temp2: "<<temp2<<endl;
+    ans = min(temp1, temp2);
+    cout<<ans;
     newline;
     return;
 }

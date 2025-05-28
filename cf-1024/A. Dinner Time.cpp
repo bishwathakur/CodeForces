@@ -84,7 +84,6 @@ void solve() {
   } else {
     yes;
   }
-
 }
 
 int32_t main() {
